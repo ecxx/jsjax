@@ -46,6 +46,7 @@ class JArray extends JaxObject {
 
     constructor() {
         super('__jobject', JArrayObjects);
+        this._val = []
     }
 
     set_recursive(chain, value) {
@@ -92,17 +93,9 @@ class JArrayModule extends JaxObject {
 
     constructor() {
         super('__jmodule', {})
-        this.constants['_slf'] = (input, ctx) => {
-            let arr = new JArray();
-            arr._val = [];
-            if (input[0] instanceof JArray) {
-                arr._val = input[0]._val;
-            }
-            if (typeof input[0] == 'number') {
-                arr._val = Array.apply(null, Array(input[0])).map(function () {return 0;})
-            }
-            return arr;
-        }
+        this.constants['array'] = new JaxFunction((input, ctx) => {
+            return new JArray();
+        })
     }
 
 }

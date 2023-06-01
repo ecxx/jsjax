@@ -18,7 +18,9 @@ class JaxContext extends JaxObject {
                 this.set_constant(nm, module.constants[nm]);
             }
         }
-        this.set_constant(name, module);
+        else {
+            this.set_constant(name, module);
+        }
     }
 
     __attachbuiltin() {
